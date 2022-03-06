@@ -8,20 +8,25 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
-@Table(name = "roles")
+@Table(name = "categories")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="product_type_id", nullable = false)
+    private ProductType productType;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> productList = new ArrayList<>();
 
 }

@@ -9,19 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "authors")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role {
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 45)
-    private String name;
+    @Column(name = "first_name", nullable = false, length = 45)
+    private String firstName;
 
-    @OneToMany(mappedBy = "role")
-    private List<User> users = new ArrayList<>();
+    @Column(name = "last_name", nullable = false, length = 45)
+    private String lastName;
+
+    @OneToMany(mappedBy = "author")
+    private List<Product> productList = new ArrayList<>();
 
 }

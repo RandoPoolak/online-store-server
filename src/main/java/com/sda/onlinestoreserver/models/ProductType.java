@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "roles")
+@Table(name="product_types")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role {
+public class ProductType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,7 +21,7 @@ public class Role {
     @Column(nullable = false, length = 45)
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<User> users = new ArrayList<>();
+    @OneToMany(mappedBy = "productType")
+    private List<Category> categories = new ArrayList<>();
 
 }
