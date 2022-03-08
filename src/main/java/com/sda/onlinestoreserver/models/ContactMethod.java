@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "contact_methods")
@@ -21,7 +19,5 @@ public class ContactMethod {
     @Column(nullable = false, length = 45)
     private String name;
 
-    @OneToMany(mappedBy = "contactMethod")
-    private List<User> users = new ArrayList<>();
 
 }

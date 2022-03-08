@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "addresses")
@@ -34,9 +33,7 @@ public class Address {
     private boolean isDefault;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable = false)
+    @JoinColumn(name="user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "deliveryAddress")
-    private List<Order> orderList = new ArrayList<>();
 }

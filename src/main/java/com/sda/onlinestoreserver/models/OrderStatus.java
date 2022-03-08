@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "order_statuses")
@@ -21,6 +20,4 @@ public class OrderStatus {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "orderStatus")
-    private List<Order> orderList = new ArrayList<>();
 }

@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -31,14 +29,12 @@ public class Product {
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name="author_id", nullable = false)
+    @JoinColumn(name="author_id", nullable = false, referencedColumnName = "id")
     private Author author;
 
     @ManyToOne
-    @JoinColumn(name="category_id", nullable = false)
+    @JoinColumn(name="category_id", nullable = false, referencedColumnName = "id")
     private Category category;
 
-    @OneToMany(mappedBy = "product")
-    private List<OrderLine> orderLineList = new ArrayList<>();
 
 }

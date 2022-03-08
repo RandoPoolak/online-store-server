@@ -1,10 +1,10 @@
 package com.sda.onlinestoreserver.repository;
 
-import com.sda.onlinestoreserver.models.ProductType;
+import com.sda.onlinestoreserver.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductTypeRepository extends JpaRepository<ProductType, Long> {
-    ProductType findById(long id);
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    Product findById(long id);
 }
