@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "authors")
@@ -24,7 +23,5 @@ public class Author {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @OneToMany(mappedBy = "author")
-    private List<Product> productList = new ArrayList<>();
 
 }

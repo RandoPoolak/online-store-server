@@ -23,10 +23,8 @@ public class Category {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="product_type_id", nullable = false)
+    @JoinColumn(name="product_type_id", nullable = false, referencedColumnName = "id")
     private ProductType productType;
 
-    @OneToMany(mappedBy = "category")
-    private List<Product> productList = new ArrayList<>();
 
 }

@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name="product_types")
@@ -20,8 +19,5 @@ public class ProductType {
 
     @Column(nullable = false, length = 45)
     private String name;
-
-    @OneToMany(mappedBy = "productType")
-    private List<Category> categories = new ArrayList<>();
 
 }

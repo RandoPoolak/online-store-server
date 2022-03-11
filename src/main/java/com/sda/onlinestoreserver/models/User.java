@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -28,18 +26,11 @@ public class User {
     private String logoUrl;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
     private Role role;
 
     @ManyToOne
-    @JoinColumn(name = "contact_method_id", nullable = false)
+    @JoinColumn(name = "contact_method_id", nullable = false, referencedColumnName = "id")
     private ContactMethod contactMethod;
-
-    @OneToMany(mappedBy = "user")
-    private List<Address> addressList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    private List<Order> orderList = new ArrayList<>();
-
 
 }

@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -24,17 +22,16 @@ public class Order {
     private Date orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "address_id", nullable = false, referencedColumnName = "id")
     private Address deliveryAddress;
 
     @ManyToOne
-    @JoinColumn(name = "order_status_id", nullable = false)
+    @JoinColumn(name = "order_status_id", nullable = false, referencedColumnName = "id")
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderLine> orderLineList = new ArrayList<>();
+
 }
