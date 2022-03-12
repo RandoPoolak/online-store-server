@@ -1,8 +1,11 @@
 package com.sda.onlinestoreserver.controller;
 
+import com.sda.onlinestoreserver.exceptions.CategoryNotFoundException;
 import com.sda.onlinestoreserver.models.Category;
-import com.sda.onlinestoreserver.repository.CategoryRepository;
+import com.sda.onlinestoreserver.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,28 +14,42 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
 
-    @GetMapping("/get_by_id/{id}")
-    public Category getById(@PathVariable("id") long id){
-        return categoryRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") long id){
+        try {
+            Category category = categoryService.findById(id);
+            return new ResponseEntity<>(category, HttpStatus.FOUND);
+
+        } catch (CategoryNotFoundException e) {
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/all")
-    public List<Category> getAll(){return categoryRepository.findAll();}
+    @GetMapping
+    public List<Category> getAll(){return categoryService.getAll();}
 
     @PostMapping("/update")
-    public void updateAuthor(@RequestBody Category category){
-        categoryRepository.save(category);
+    public void updateCategory(@RequestBody Category category){
+        try{
+            categoryService.updateCategory(category);
+        }catch (CategoryNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @GetMapping("/delete/{id}")
-    public void deleteAuthor(@PathVariable("id") long id){
-        categoryRepository.deleteById(id);
+    public void deleteCategory(@PathVariable("id") long id){
+        try{
+            categoryService.deleteCategoryById(id);
+        }catch (CategoryNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @PostMapping("/save")
-    public void saveAuthor(@RequestBody Category category){
-        categoryRepository.save(category);
+    public void createCategory(@RequestBody Category category){
+        categoryService.createCategory(category);
     }
 }

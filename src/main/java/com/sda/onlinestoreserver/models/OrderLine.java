@@ -1,30 +1,21 @@
 package com.sda.onlinestoreserver.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="order_lines")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="product_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
     private Product product;
 
-    @Column(nullable = false)
-    private int quantity;
+    private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name="order_id", nullable = false, referencedColumnName = "id")
-    private Order order;
+    private boolean isActive;
 
 }

@@ -1,7 +1,10 @@
 package com.sda.onlinestoreserver.controller;
+import com.sda.onlinestoreserver.exceptions.AddressNotFoundException;
 import com.sda.onlinestoreserver.models.Address;
-import com.sda.onlinestoreserver.repository.AddressRepository;
+import com.sda.onlinestoreserver.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,30 +13,44 @@ import java.util.List;
 public class AddressController {
 
     @Autowired
-    private AddressRepository addressRepository;
+    private AddressService addressService;
 
-    @GetMapping("/get_by_id/{id}")
-    public Address getById(@PathVariable("id") long id) {
-        return addressRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") long id) {
+        try {
+            Address address = addressService.findById(id);
+            return new ResponseEntity<>(address, HttpStatus.FOUND);
+
+        } catch (AddressNotFoundException e) {
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Address> getAll() {
-        return addressRepository.findAll();
+        return addressService.getAll();
     }
 
     @PostMapping("/update")
     public void updateAddress(@RequestBody Address address) {
-        addressRepository.save(address);
+        try{
+            addressService.updateAddress(address);
+        }catch (AddressNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @GetMapping("/delete/{id}")
     public void deleteAddress(@PathVariable("id") long id) {
-        addressRepository.deleteById(id);
+        try{
+            addressService.deleteAddressById(id);
+        }catch (AddressNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
-    @PostMapping("/save")
-    public void saveAddress(@RequestBody Address address) {
-        addressRepository.save(address);
+    @PostMapping("/create")
+    public void createAddress(@RequestBody Address address) {
+        addressService.createAddress(address);
     }
 }

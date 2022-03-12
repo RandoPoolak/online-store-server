@@ -1,36 +1,32 @@
 package com.sda.onlinestoreserver.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(nullable = false, length = 45)
     private String login;
 
-    @Column(nullable = false, length = 128)
     private String password;
 
-    @Column(name = "logo_url", nullable = false, length = 256)
     private String logoUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToOne
-    @JoinColumn(name = "contact_method_id", nullable = false, referencedColumnName = "id")
+    @Enumerated(EnumType.STRING)
     private ContactMethod contactMethod;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Address> addresses;
+
+    private boolean isActive;
 
 }

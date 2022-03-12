@@ -1,37 +1,33 @@
 package com.sda.onlinestoreserver.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
+@Data
 @Table(name = "orders")
-@Getter
-@Setter
-@NoArgsConstructor
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "order_date", nullable = false)
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false, referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
     private Address deliveryAddress;
 
-    @ManyToOne
-    @JoinColumn(name = "order_status_id", nullable = false, referencedColumnName = "id")
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    private boolean isActive;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrderLine> orderLines;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
 }

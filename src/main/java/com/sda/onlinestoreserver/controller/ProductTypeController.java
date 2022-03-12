@@ -1,38 +1,54 @@
 package com.sda.onlinestoreserver.controller;
 
+import com.sda.onlinestoreserver.exceptions.ProductTypeNotFoundException;
 import com.sda.onlinestoreserver.models.ProductType;
-import com.sda.onlinestoreserver.repository.ProductTypeRepository;
+import com.sda.onlinestoreserver.services.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/product_type")
+@RequestMapping("/product-type")
 public class ProductTypeController {
     @Autowired
-    private ProductTypeRepository productTypeRepository;
+    private ProductTypeService productTypeService;
 
-    @GetMapping("/get_by_id/{id}")
-    public ProductType getById(@PathVariable("id") long id){
-        return productTypeRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") long id){
+        try{
+            ProductType productType = productTypeService.findById(id);
+            return new ResponseEntity<>(productType, HttpStatus.FOUND);
+        }catch (ProductTypeNotFoundException e){
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/all")
-    public List<ProductType> getAll(){return productTypeRepository.findAll();}
+    @GetMapping
+    public List<ProductType> getAll(){return productTypeService.getAll();}
 
     @PostMapping("/update")
     public void updateAuthor(@RequestBody ProductType productType){
-        productTypeRepository.save(productType);
+        try{
+            productTypeService.updateProductType(productType);
+        }catch (ProductTypeNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @GetMapping("/delete/{id}")
     public void deleteAuthor(@PathVariable("id") long id){
-        productTypeRepository.deleteById(id);
+        try{
+            productTypeService.deleteProductTypeById(id);
+        }catch (ProductTypeNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @PostMapping("/save")
     public void saveAuthor(@RequestBody ProductType productType){
-        productTypeRepository.save(productType);
+        productTypeService.createProductType(productType);
     }
 }

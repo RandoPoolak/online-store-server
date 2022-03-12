@@ -1,23 +1,22 @@
 package com.sda.onlinestoreserver.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
-@Table(name="product_types")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class ProductType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(nullable = false, length = 45)
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Category> categories;
+
+    private boolean isActive;
 }

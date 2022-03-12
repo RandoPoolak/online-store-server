@@ -1,8 +1,12 @@
 package com.sda.onlinestoreserver.controller;
 
+import com.sda.onlinestoreserver.exceptions.ProductNotFoundException;
 import com.sda.onlinestoreserver.models.Product;
 import com.sda.onlinestoreserver.repository.ProductRepository;
+import com.sda.onlinestoreserver.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,28 +15,41 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
-    @GetMapping("/get_by_id/{id}")
-    public Product getById(@PathVariable("id") long id){
-        return productRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") long id){
+        try{
+            Product product = productService.findById(id);
+            return new ResponseEntity<>(product, HttpStatus.FOUND);
+        }catch (ProductNotFoundException e){
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/all")
-    public List<Product> getAll(){return productRepository.findAll();}
+    @GetMapping
+    public List<Product> getAll(){return productService.getAll();}
 
     @PostMapping("/update")
-    public void updateAuthor(@RequestBody Product product){
-        productRepository.save(product);
+    public void updateProduct(@RequestBody Product product){
+        try{
+            productService.updateProduct(product);
+        }catch (ProductNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @GetMapping("/delete/{id}")
-    public void deleteAuthor(@PathVariable("id") long id){
-        productRepository.deleteById(id);
+    public void deleteProduct(@PathVariable("id") long id){
+        try{
+            productService.deleteProductById(id);
+        }catch (ProductNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @PostMapping("/save")
-    public void saveAuthor(@RequestBody Product product){
-        productRepository.save(product);
+    public void saveProduct(@RequestBody Product product){
+        productService.createProduct(product);
     }
 }

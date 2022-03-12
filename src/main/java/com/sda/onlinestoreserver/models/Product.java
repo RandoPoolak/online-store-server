@@ -1,40 +1,27 @@
 package com.sda.onlinestoreserver.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "products")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(nullable = false, length = 128)
     private String description;
 
-    @Column(name="thumbnail_url",nullable = false,length = 256)
     private String thumbnailUrl;
 
-    @Column(nullable = false)
-    private Double price;
+    private BigDecimal price;
 
-    @Column(nullable = false)
-    private int stock;
+    private Integer stock;
 
-    @ManyToOne
-    @JoinColumn(name="author_id", nullable = false, referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
     private Author author;
 
-    @ManyToOne
-    @JoinColumn(name="category_id", nullable = false, referencedColumnName = "id")
-    private Category category;
-
-
+    private boolean isActive;
 }
