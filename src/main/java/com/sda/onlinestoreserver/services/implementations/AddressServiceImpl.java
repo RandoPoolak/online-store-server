@@ -31,6 +31,13 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public void restoreAddressById(Long id) throws AddressNotFoundException {
+        Address address = findById(id);
+        address.setActive(true);
+        addressRepository.saveAndFlush(address);
+    }
+
+    @Override
     public Address findById(Long id) throws AddressNotFoundException {
         Optional<Address> addressOptional = addressRepository.findById(id);
 

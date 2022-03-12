@@ -1,5 +1,6 @@
 package com.sda.onlinestoreserver.services;
 
+import com.sda.onlinestoreserver.exceptions.AddressNotFoundException;
 import com.sda.onlinestoreserver.exceptions.CategoryNotFoundException;
 import com.sda.onlinestoreserver.models.Category;
 
@@ -17,6 +18,13 @@ public interface CategoryService {
      * @param id Category id
      */
     void deleteCategoryById(Long id) throws CategoryNotFoundException;
+
+    /**
+     * To restore category by its id
+     * @param id of the category
+     * @throws CategoryNotFoundException if no category
+     */
+    void restoreCategoryById(Long id) throws CategoryNotFoundException;
 
     /**
      * To find category by its id

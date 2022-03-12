@@ -1,5 +1,6 @@
 package com.sda.onlinestoreserver.services;
 
+import com.sda.onlinestoreserver.exceptions.OrderLineNotFoundException;
 import com.sda.onlinestoreserver.exceptions.OrderNotFoundException;
 import com.sda.onlinestoreserver.models.Address;
 import com.sda.onlinestoreserver.models.Order;
@@ -18,6 +19,13 @@ public interface OrderService {
      * @param id Order id
      */
     void deleteOrderById(Long id) throws OrderNotFoundException;
+
+    /**
+     * To restore order by its id
+     * @param id of the order
+     * @throws OrderNotFoundException if no order
+     */
+    void restoreOrderById(Long id) throws OrderNotFoundException;
 
     /**
      * To find order by its id

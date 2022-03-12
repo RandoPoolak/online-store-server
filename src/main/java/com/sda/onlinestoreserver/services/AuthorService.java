@@ -1,5 +1,6 @@
 package com.sda.onlinestoreserver.services;
 
+import com.sda.onlinestoreserver.exceptions.AddressNotFoundException;
 import com.sda.onlinestoreserver.exceptions.AuthorNotFoundException;
 import com.sda.onlinestoreserver.models.Author;
 
@@ -18,6 +19,13 @@ public interface AuthorService {
      * @param id Author id
      */
     void deleteAuthorById(Long id) throws AuthorNotFoundException;
+
+    /**
+     * To restore author by its id
+     * @param id of the author
+     * @throws AuthorNotFoundException if no author
+     */
+    void restoreAuthorById(Long id) throws AuthorNotFoundException;
 
     /**
      * To find author by its id

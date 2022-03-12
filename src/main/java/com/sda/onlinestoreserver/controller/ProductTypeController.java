@@ -47,6 +47,15 @@ public class ProductTypeController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreAuthor(@PathVariable("id") long id){
+        try{
+            productTypeService.restoreProductTypeById(id);
+        }catch (ProductTypeNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/save")
     public void saveAuthor(@RequestBody ProductType productType){
         productTypeService.createProductType(productType);

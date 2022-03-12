@@ -48,6 +48,15 @@ public class CategoryController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreCategory(@PathVariable("id") long id){
+        try{
+            categoryService.restoreCategoryById(id);
+        }catch (CategoryNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/save")
     public void createCategory(@RequestBody Category category){
         categoryService.createCategory(category);

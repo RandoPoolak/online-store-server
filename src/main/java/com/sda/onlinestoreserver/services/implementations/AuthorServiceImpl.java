@@ -31,6 +31,13 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public void restoreAuthorById(Long id) throws AuthorNotFoundException {
+        Author author = findById(id);
+        author.setActive(true);
+        authorRepository.saveAndFlush(author);
+    }
+
+    @Override
     public Author findById(Long id) throws AuthorNotFoundException {
         Optional<Author> authorOptional = authorRepository.findById(id);
 

@@ -48,6 +48,15 @@ public class OrderLineController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreOrderLine(@PathVariable("id") long id){
+        try{
+            orderLineService.restoreOrderLineById(id);
+        }catch (OrderLineNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/save")
     public void saveOrderLine(@RequestBody OrderLine orderLine){
         orderLineService.createOrderLine(orderLine);

@@ -1,5 +1,6 @@
 package com.sda.onlinestoreserver.services;
 
+import com.sda.onlinestoreserver.exceptions.OrderLineNotFoundException;
 import com.sda.onlinestoreserver.exceptions.ProductNotFoundException;
 import com.sda.onlinestoreserver.models.Product;
 
@@ -19,6 +20,13 @@ public interface ProductService {
      * @param id Product id
      */
     void deleteProductById(Long id) throws ProductNotFoundException;
+
+    /**
+     * To restore product by its id
+     * @param id of the product
+     * @throws ProductNotFoundException if no product
+     */
+    void restoreProductById(Long id) throws ProductNotFoundException;
 
     /**
      * To find product by its id

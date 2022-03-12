@@ -32,6 +32,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void restoreOrderById(Long id) throws OrderNotFoundException {
+        Order order = findById(id);
+        order.setActive(true);
+        orderRepository.saveAndFlush(order);
+    }
+
+    @Override
     public Order findById(Long id) throws OrderNotFoundException {
         Optional<Order> orderOptional = orderRepository.findById(id);
 

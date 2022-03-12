@@ -51,6 +51,15 @@ public class AuthorController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreAuthor(@PathVariable("id") long id) {
+        try{
+            authorService.restoreAuthorById(id);
+        }catch (AuthorNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/save")
     public void createAuthor(@RequestBody Author author) {
         authorService.createAuthor(author);

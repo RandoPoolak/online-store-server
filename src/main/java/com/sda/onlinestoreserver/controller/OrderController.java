@@ -51,6 +51,15 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreOrder(@PathVariable("id") long id) {
+        try{
+            orderService.restoreOrderById(id);
+        } catch (OrderNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/create")
     public void createOrder(@RequestBody Order order) {
         orderService.createOrder(order);

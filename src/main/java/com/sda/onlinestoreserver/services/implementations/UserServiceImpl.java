@@ -31,6 +31,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void restoreUserById(Long id) throws UserNotFoundException {
+        User user = findById(id);
+        user.setActive(true);
+        userRepository.saveAndFlush(user);
+    }
+
+    @Override
     public User findById(Long id) throws UserNotFoundException {
         Optional<User> optionalUser = userRepository.findById(id);
 

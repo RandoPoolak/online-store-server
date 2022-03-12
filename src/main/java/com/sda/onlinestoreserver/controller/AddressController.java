@@ -49,6 +49,15 @@ public class AddressController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreAddress(@PathVariable("id") long id) {
+        try{
+            addressService.restoreAddressById(id);
+        }catch (AddressNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/create")
     public void createAddress(@RequestBody Address address) {
         addressService.createAddress(address);

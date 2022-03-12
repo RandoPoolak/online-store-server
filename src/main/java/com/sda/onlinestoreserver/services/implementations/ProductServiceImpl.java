@@ -32,6 +32,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void restoreProductById(Long id) throws ProductNotFoundException {
+        Product product = findById(id);
+        product.setActive(true);
+        productRepository.saveAndFlush(product);
+    }
+
+    @Override
     public Product findById(Long id) throws ProductNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
 

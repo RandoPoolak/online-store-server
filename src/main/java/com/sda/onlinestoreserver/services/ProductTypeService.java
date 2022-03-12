@@ -1,5 +1,6 @@
 package com.sda.onlinestoreserver.services;
 
+import com.sda.onlinestoreserver.exceptions.OrderLineNotFoundException;
 import com.sda.onlinestoreserver.exceptions.ProductTypeNotFoundException;
 import com.sda.onlinestoreserver.models.ProductType;
 
@@ -19,6 +20,13 @@ public interface ProductTypeService {
      * @param id ProductType id
      */
     void deleteProductTypeById(Long id) throws ProductTypeNotFoundException;
+
+    /**
+     * To restore productType by its id
+     * @param id of the productType
+     * @throws ProductTypeNotFoundException if no productType
+     */
+    void restoreProductTypeById(Long id) throws ProductTypeNotFoundException;
 
     /**
      * To find productType by its id

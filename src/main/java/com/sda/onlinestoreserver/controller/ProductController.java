@@ -48,6 +48,15 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreProduct(@PathVariable("id") long id){
+        try{
+            productService.restoreProductById(id);
+        }catch (ProductNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/save")
     public void saveProduct(@RequestBody Product product){
         productService.createProduct(product);

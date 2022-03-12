@@ -31,6 +31,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public void restoreCategoryById(Long id) throws CategoryNotFoundException {
+        Category category = findById(id);
+        category.setActive(true);
+        categoryRepository.saveAndFlush(category);
+    }
+
+    @Override
     public Category findById(Long id) throws CategoryNotFoundException {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
 

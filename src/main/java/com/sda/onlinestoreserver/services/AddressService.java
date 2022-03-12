@@ -15,8 +15,16 @@ public interface AddressService {
     /**
      * To delete address by its id
      * @param id Address id
+     * @throws AddressNotFoundException if no address
      */
     void deleteAddressById(Long id) throws AddressNotFoundException;
+
+    /**
+     * To restore address by its id
+     * @param id of the address
+     * @throws AddressNotFoundException if no address
+     */
+    void restoreAddressById(Long id) throws AddressNotFoundException;
 
     /**
      * To find order by its id

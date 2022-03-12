@@ -31,6 +31,13 @@ public class OrderLineServiceImpl implements OrderLineService {
     }
 
     @Override
+    public void restoreOrderLineById(Long id) throws OrderLineNotFoundException {
+        OrderLine orderLine = findById(id);
+        orderLine.setActive(true);
+        orderLineRepository.saveAndFlush(orderLine);
+    }
+
+    @Override
     public OrderLine findById(Long id) throws OrderLineNotFoundException {
         Optional<OrderLine> optionalOrderLine = orderLineRepository.findById(id);
 

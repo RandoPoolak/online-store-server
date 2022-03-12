@@ -1,5 +1,6 @@
 package com.sda.onlinestoreserver.services;
 
+import com.sda.onlinestoreserver.exceptions.ProductTypeNotFoundException;
 import com.sda.onlinestoreserver.exceptions.UserNotFoundException;
 import com.sda.onlinestoreserver.models.User;
 
@@ -19,6 +20,13 @@ public interface UserService {
      * @param id User id
      */
     void deleteUserById(Long id) throws UserNotFoundException;
+
+    /**
+     * To restore user by its id
+     * @param id of the user
+     * @throws UserNotFoundException if no user
+     */
+    void restoreUserById(Long id) throws UserNotFoundException;
 
     /**
      * To find user by its id

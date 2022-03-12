@@ -49,6 +49,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/restore/{id}")
+    public void restoreUser(@PathVariable("id") long id) {
+        try{
+            userService.restoreUserById(id);
+        }catch (UserNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("/save")
     public void saveUser(@RequestBody User user) {
         userService.createUser(user);
