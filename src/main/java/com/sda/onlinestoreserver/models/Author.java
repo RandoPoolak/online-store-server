@@ -2,7 +2,6 @@ package com.sda.onlinestoreserver.models;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity
