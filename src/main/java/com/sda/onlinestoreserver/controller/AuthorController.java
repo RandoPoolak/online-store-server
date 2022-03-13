@@ -61,7 +61,7 @@ public class AuthorController {
         }
     }
 
-    @PostMapping("/save")
+    @PostMapping("/create")
     public void createAuthor(@RequestBody Author author) {
         authorService.createAuthor(author);
     }

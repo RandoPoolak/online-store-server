@@ -58,8 +58,8 @@ public class OrderLineController {
         }
     }
 
-    @PostMapping("/save")
-    public void saveOrderLine(@RequestBody OrderLine orderLine){
+    @PostMapping("/create")
+    public void createOrderLine(@RequestBody OrderLine orderLine){
         orderLineService.createOrderLine(orderLine);
     }
 }

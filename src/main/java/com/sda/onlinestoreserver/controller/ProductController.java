@@ -58,8 +58,8 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/save")
-    public void saveProduct(@RequestBody Product product){
+    @PostMapping("/create")
+    public void createProduct(@RequestBody Product product){
         productService.createProduct(product);
     }
 }

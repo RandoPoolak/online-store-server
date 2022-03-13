@@ -58,7 +58,7 @@ public class CategoryController {
         }
     }
 
-    @PostMapping("/save")
+    @PostMapping("/create")
     public void createCategory(@RequestBody Category category){
         categoryService.createCategory(category);
     }

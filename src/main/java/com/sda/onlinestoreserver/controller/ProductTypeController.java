@@ -57,8 +57,8 @@ public class ProductTypeController {
         }
     }
 
-    @PostMapping("/save")
-    public void saveAuthor(@RequestBody ProductType productType){
+    @PostMapping("/create")
+    public void createAuthor(@RequestBody ProductType productType){
         productTypeService.createProductType(productType);
     }
 }
