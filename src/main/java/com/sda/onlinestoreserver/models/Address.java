@@ -20,7 +20,7 @@ public class Address {
 
     private String zipCode;
 
-    private boolean isDefault;
+    private boolean isDefaultAddress;
 
     private boolean isActive;
 
