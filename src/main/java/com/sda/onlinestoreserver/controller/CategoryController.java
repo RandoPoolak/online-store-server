@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
@@ -21,7 +20,7 @@ public class CategoryController {
     public ResponseEntity<?> getById(@PathVariable("id") long id){
         try {
             Category category = categoryService.findById(id);
-            return new ResponseEntity<>(category, HttpStatus.FOUND);
+            return new ResponseEntity<>(category, HttpStatus.OK);
 
         } catch (CategoryNotFoundException e) {
             return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);

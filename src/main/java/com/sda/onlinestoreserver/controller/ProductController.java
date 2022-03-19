@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -22,7 +21,7 @@ public class ProductController {
     public ResponseEntity<?> getById(@PathVariable("id") long id){
         try{
             Product product = productService.findById(id);
-            return new ResponseEntity<>(product, HttpStatus.FOUND);
+            return new ResponseEntity<>(product, HttpStatus.OK);
         }catch (ProductNotFoundException e){
             return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
         }

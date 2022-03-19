@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/address")
 public class AddressController {
@@ -20,7 +19,7 @@ public class AddressController {
     public ResponseEntity<?> getById(@PathVariable("id") long id) {
         try {
             Address address = addressService.findById(id);
-            return new ResponseEntity<>(address, HttpStatus.FOUND);
+            return new ResponseEntity<>(address, HttpStatus.OK);
 
         } catch (AddressNotFoundException e) {
             return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);

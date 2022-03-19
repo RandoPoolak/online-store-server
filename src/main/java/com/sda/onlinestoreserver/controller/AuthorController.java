@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
@@ -23,7 +22,7 @@ public class AuthorController {
     public ResponseEntity<?> getById(@PathVariable("id") long id) {
         try{
             Author author = authorService.findById(id);
-            return new ResponseEntity<>(author, HttpStatus.FOUND);
+            return new ResponseEntity<>(author, HttpStatus.OK);
         }catch (AuthorNotFoundException e){
             return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
         }

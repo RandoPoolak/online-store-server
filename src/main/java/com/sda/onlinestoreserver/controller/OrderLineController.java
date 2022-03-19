@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/order-line")
 public class OrderLineController {
@@ -22,7 +21,7 @@ public class OrderLineController {
     public ResponseEntity<?> getById(@PathVariable("id") long id){
         try{
             OrderLine orderLine = orderLineService.findById(id);
-            return new ResponseEntity<>(orderLine, HttpStatus.FOUND);
+            return new ResponseEntity<>(orderLine, HttpStatus.OK);
         }catch (OrderLineNotFoundException e){
             return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
         }
