@@ -1,6 +1,5 @@
 package com.sda.onlinestoreserver.services;
 
-import com.sda.onlinestoreserver.exceptions.ProductTypeNotFoundException;
 import com.sda.onlinestoreserver.exceptions.UserNotFoundException;
 import com.sda.onlinestoreserver.models.User;
 
