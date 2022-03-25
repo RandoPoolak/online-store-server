@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "app.api.external.location",
+      "type": "java.lang.String",
+      "description": "Description for app.api.external.location."
+    },
+    {
+      "name": "app.api.external.weather",
+      "type": "java.lang.String",
+      "description": "Description for app.api.external.weather."
+    }
+  ] }

@@ -20,7 +20,7 @@ public class Product {
 
     private Integer stock;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
     private Author author;
 
     private boolean isActive;
