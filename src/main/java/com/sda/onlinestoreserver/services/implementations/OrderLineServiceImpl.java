@@ -24,7 +24,7 @@ public class OrderLineServiceImpl implements OrderLineService {
     }
 
     @Override
-    public void deleteOrderLineById(Long id) throws OrderLineNotFoundException {
+    public void deactivateOrderLineById(Long id) throws OrderLineNotFoundException {
         OrderLine orderLine = findById(id);
         orderLine.setActive(false);
         orderLineRepository.saveAndFlush(orderLine);
@@ -58,5 +58,15 @@ public class OrderLineServiceImpl implements OrderLineService {
         if(findById(orderLine.getId()) != null){
             orderLineRepository.saveAndFlush(orderLine);
         }
+    }
+
+    @Override
+    public void deleteOrderLineById(Long id){
+        orderLineRepository.deleteById(id);
+    }
+
+    @Override
+    public List<OrderLine> getAllUserActiveOrderLines(Long id){
+        return orderLineRepository.getByUserIdAndIsActive(id, true);
     }
 }

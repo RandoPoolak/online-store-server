@@ -2,6 +2,7 @@ package com.sda.onlinestoreserver.controller;
 
 import com.sda.onlinestoreserver.exceptions.OrderNotFoundException;
 import com.sda.onlinestoreserver.models.Order;
+import com.sda.onlinestoreserver.models.OrderStatus;
 import com.sda.onlinestoreserver.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,5 +64,15 @@ public class OrderController {
     @PostMapping("/create")
     public void createOrder(@RequestBody Order order) {
         orderService.createOrder(order);
+    }
+
+    @GetMapping("/active/{userId}")
+    public List<Order> getAllActive(@PathVariable("userId") Long userId) {
+        return orderService.getAllWithUserIdAndStatusIsNot(userId, OrderStatus.DELIVERED);
+    }
+
+    @GetMapping("/completed/{userId}")
+    public List<Order> getAllCompleted(@PathVariable("userId") Long userId) {
+        return orderService.getAllWithUserIdAndStatus(userId, OrderStatus.DELIVERED);
     }
 }

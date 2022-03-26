@@ -39,10 +39,10 @@ public class OrderLineController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public void deleteOrderLine(@PathVariable("id") long id){
+    @GetMapping("/deactivate/{id}")
+    public void deactivateOrderLine(@PathVariable("id") long id){
         try{
-            orderLineService.deleteOrderLineById(id);
+            orderLineService.deactivateOrderLineById(id);
         }catch (OrderLineNotFoundException e){
             System.out.println(e.getLocalizedMessage());
         }
@@ -60,5 +60,15 @@ public class OrderLineController {
     @PostMapping("/create")
     public void createOrderLine(@RequestBody OrderLine orderLine){
         orderLineService.createOrderLine(orderLine);
+    }
+
+    @GetMapping("/delete/{id}")
+    public void deleteOrderLine(@PathVariable("id") long id){
+        orderLineService.deleteOrderLineById(id);
+    }
+
+    @GetMapping("/user/{id}")
+    public List<OrderLine> userActiveOrderLines(@PathVariable("id") long id){
+        return orderLineService.getAllUserActiveOrderLines(id);
     }
 }

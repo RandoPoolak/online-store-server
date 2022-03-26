@@ -3,6 +3,7 @@ package com.sda.onlinestoreserver.services.implementations;
 import com.sda.onlinestoreserver.exceptions.OrderNotFoundException;
 import com.sda.onlinestoreserver.models.Address;
 import com.sda.onlinestoreserver.models.Order;
+import com.sda.onlinestoreserver.models.OrderStatus;
 import com.sda.onlinestoreserver.repository.OrderRepository;
 import com.sda.onlinestoreserver.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,15 @@ public class OrderServiceImpl implements OrderService {
         if(findById(order.getId()) != null){
             orderRepository.saveAndFlush(order);
         }
+    }
+
+    @Override
+    public List<Order> getAllWithUserIdAndStatus(Long id, OrderStatus status){
+        return this.orderRepository.getByUserIdAndOrderStatus(id, status);
+    }
+
+    @Override
+    public List<Order> getAllWithUserIdAndStatusIsNot(Long id, OrderStatus status){
+        return this.orderRepository.getByUserIdAndOrderStatusIsNot(id, status);
     }
 }

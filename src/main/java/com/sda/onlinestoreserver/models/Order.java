@@ -28,6 +28,6 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
     private User user;
 }

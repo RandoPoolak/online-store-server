@@ -17,7 +17,7 @@ public interface OrderLineService {
      * To delete orderLine by its id
      * @param id OrderLine id
      */
-    void deleteOrderLineById(Long id) throws OrderLineNotFoundException;
+    void deactivateOrderLineById(Long id) throws OrderLineNotFoundException;
 
     /**
      * To restore orderLine by its id
@@ -40,10 +40,21 @@ public interface OrderLineService {
      */
     List<OrderLine> getAll();
 
-
     /**
      * To update existing orderLine
      * @param orderLine modified orderLine
      */
     void updateOrderLine(OrderLine orderLine) throws OrderLineNotFoundException;
+
+    /**
+     * To delete orderLine by its id
+     * @param id OrderLine id
+     */
+    void deleteOrderLineById(Long id);
+
+    /**
+     * To get all orderLines
+     * @return all orderLines
+     */
+    List<OrderLine> getAllUserActiveOrderLines(Long id);
 }
