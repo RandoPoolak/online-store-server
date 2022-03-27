@@ -12,6 +12,11 @@ public class OnlineStoreServerApplication {
         SpringApplication.run(OnlineStoreServerApplication.class, args);
     }
 
+//    @Bean
+//    public BCryptPasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
