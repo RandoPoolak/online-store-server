@@ -14,6 +14,7 @@ public class Product {
 
     private String description;
 
+    @Column(length = 500)
     private String thumbnailUrl;
 
     private BigDecimal price;

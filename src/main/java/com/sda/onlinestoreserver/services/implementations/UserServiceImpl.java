@@ -1,6 +1,7 @@
 package com.sda.onlinestoreserver.services.implementations;
 
 import com.sda.onlinestoreserver.exceptions.UserNotFoundException;
+import com.sda.onlinestoreserver.models.Role;
 import com.sda.onlinestoreserver.models.User;
 import com.sda.onlinestoreserver.repository.UserRepository;
 import com.sda.onlinestoreserver.services.UserService;
@@ -57,5 +58,10 @@ public class UserServiceImpl implements UserService {
         if (findById(user.getId()) != null) {
             userRepository.saveAndFlush(user);
         }
+    }
+
+    @Override
+    public List<User> getAllAdmins() {
+        return userRepository.findByRole(Role.ADMIN);
     }
 }

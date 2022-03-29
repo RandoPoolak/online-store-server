@@ -2,7 +2,6 @@ package com.sda.onlinestoreserver.controller;
 
 import com.sda.onlinestoreserver.exceptions.AuthorNotFoundException;
 import com.sda.onlinestoreserver.models.Author;
-import com.sda.onlinestoreserver.repository.AuthorRepository;
 import com.sda.onlinestoreserver.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -32,12 +32,14 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public void updateUser(@RequestBody User user) {
+    public User updateUser(@RequestBody User user) {
         try{
             userService.updateUser(user);
+            return userService.findById(user.getId());
         }catch (UserNotFoundException e){
             System.out.println(e.getLocalizedMessage());
         }
+        return null;
     }
 
     @GetMapping("/delete/{id}")

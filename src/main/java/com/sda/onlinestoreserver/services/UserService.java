@@ -43,11 +43,17 @@ public interface UserService {
      */
     List<User> getAll();
 
-
     /**
      * To update existing user
      *
      * @param user modified user
      */
     void updateUser(User user) throws UserNotFoundException;
+
+    /**
+     * To get list of admins
+     *
+     *@return returns list of admins
+     */
+    List<User> getAllAdmins();
 }

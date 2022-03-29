@@ -1,6 +1,5 @@
 package com.sda.onlinestoreserver.services;
 
-import com.sda.onlinestoreserver.exceptions.AddressNotFoundException;
 import com.sda.onlinestoreserver.exceptions.AuthorNotFoundException;
 import com.sda.onlinestoreserver.models.Author;
 

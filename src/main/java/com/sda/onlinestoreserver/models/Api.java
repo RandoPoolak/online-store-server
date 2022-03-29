@@ -17,4 +17,14 @@ public class Api {
     private String apiKey;
 
     private String identifier;
+
+    public Api(){
+        super();
+    }
+
+    public Api(Long id, String apiKey, String identifier){
+        this.id = id;
+        this.apiKey = apiKey;
+        this.identifier = identifier;
+    }
 }
