@@ -32,6 +32,11 @@ public class AuthorController {
         return authorService.getAll();
     }
 
+    @GetMapping("/active")
+    public List<Author> getAllActive() {
+        return authorService.getAllActive();
+    }
+
     @PostMapping("/update")
     public void updateAuthor(@RequestBody Author author) {
         try{

@@ -46,4 +46,10 @@ public interface AuthorService {
      * @param author modified author
      */
     void updateAuthor(Author author) throws AuthorNotFoundException;
+
+    /**
+     * To get all active author
+     * @return all active author
+     */
+    List<Author> getAllActive();
 }

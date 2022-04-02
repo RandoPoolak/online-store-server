@@ -10,5 +10,5 @@ import java.util.List;
 public interface OrderLineRepository extends JpaRepository<OrderLine, Long> {
     void deleteById(Long id);
 
-    List<OrderLine> getByUserIdAndIsActive(Long id, boolean isActive);
+    List<OrderLine> getByUserIdAndIsActive(Long id, boolean Active);
 }

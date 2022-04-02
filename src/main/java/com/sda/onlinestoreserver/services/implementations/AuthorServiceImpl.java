@@ -59,4 +59,9 @@ public class AuthorServiceImpl implements AuthorService {
             authorRepository.saveAndFlush(author);
         }
     }
+
+    @Override
+    public List<Author> getAllActive() {
+        return authorRepository.findAllByIsActive(true);
+    }
 }

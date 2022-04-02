@@ -30,13 +30,21 @@ public class TreeNodeServiceImpl implements TreeNodeService {
                         List<TreeNode> treeNodeProducts = new ArrayList<>();
                         for (Product product : category.getProducts()) {
                             if (product.isActive()) {
-                                treeNodeProducts.add(new TreeNode(product.getId(), product.getDescription(), category.getId(), null, "Product", product.isActive()));
+                                treeNodeProducts.add(new TreeNode(product.getId(), product.getDescription(), category.getId(), null, "product", product.isActive()));
                             }
                         }
-                        treeNodeCategories.add(new TreeNode(category.getId(), category.getName(), productType.getId(), treeNodeProducts, "Category", category.isActive()));
+                        if(treeNodeProducts.isEmpty()){
+                            break;
+                        }else{
+                            treeNodeCategories.add(new TreeNode(category.getId(), category.getName(), productType.getId(), treeNodeProducts, "category", category.isActive()));
+                        }
                     }
                 }
-                treeNodes.add(new TreeNode(productType.getId(), productType.getName(), treeNodeCategories,"ProductType", productType.isActive()));
+                if(treeNodeCategories.isEmpty()){
+                    break;
+                }else{
+                    treeNodes.add(new TreeNode(productType.getId(), productType.getName(), treeNodeCategories,"product-type", productType.isActive()));
+                }
             }
         }
 
